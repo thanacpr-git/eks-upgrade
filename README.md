@@ -6,13 +6,13 @@
 
 Welcome to the **EKS Upgrade** workshop. This workshop aims to provide platform engineers ...  
 
-The workshop is structured into two parts: Upgrade planning, and In-place Amazon EKS upgrade.
+The workshop is structured into two parts: Upgrade planning, and Implement Amazon EKS upgrade.
 
 ### Upgrade Planning
 
 The first part of our workshop provides ...
 
-### In-place EKS Upgrade
+### Implement EKS Upgrade
 
 This part of our workshop will ...
 
