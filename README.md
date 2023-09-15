@@ -4,7 +4,7 @@
 ** P'Jade **
 -->
 
-Welcome to the **EKS Upgrade** workshop. This workshop aims to provide platform engineers with recommended practice and hands-on step for EKS upgrade operation. Customer will learn how to upgrade EKS cluster from EKS version 1.24 to 1.25 with example Kubernetes application to demonstrate step that need to check before performing the upgrade. 
+Welcome to the **EKS Upgrade** workshop. This workshop aims to share recommended practice and hands-on step for EKS upgrade operation. Customer will learn how to upgrade EKS cluster from EKS version 1.24 to 1.25 with example Kubernetes application to demonstrate step that need to check before performing the upgrade. 
 
 The workshop is structured into two parts: Upgrade planning, and Implement Amazon EKS upgrade.
 
