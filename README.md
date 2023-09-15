@@ -1,36 +1,77 @@
-# Containers Zero to One Workshop
-<!--- # docker-conprehensive-lab-guide -->
+# EKS Upgrade Workshop
+<!--- # In-place EKS Upgrade workshop -->
+<!--
+** P'Jade **
+-->
 
-Welcome to the **Containers Zero to One** workshop. This workshop aims to provide developers and DevOps engineers with _little or no containers experience_ some hands-on practice from the ground up. We start from containerizing an applicaiton, to deploying a practical containerized application on AWS.
+Welcome to the **EKS Upgrade** workshop. This workshop aims to provide platform engineers ...  
 
-The workshop is structured into two parts: Containers & Docker, and Deploying your container service on AWS App Runner.
+The workshop is structured into two parts: Upgrade planning, and In-place Amazon EKS upgrade.
 
-### Containers & Docker
+### Upgrade Planning
 
-The first part of our workshop provides an introduction to _containers_ and _Docker_. This two-part lab begins with Docker basics, covering how to use the _Docker cli_ to manipulate container instances and images. The second part focuses on building a container image using a _Dockerfile_ and creating a production-grade container image.
+The first part of our workshop provides ...
 
-### AWS App Runner
+### In-place EKS Upgrade
 
-This part of our workshop will launch our example containerized hotel applicaiton from part one as a service on AWS App Runner. We will configure a _VPC Connector_ for App Runner to allow our application to communicate with our RDS database in our VPC, experiment with autoscaling, and observability for our application in App Runner.
+This part of our workshop will ...
 
 ## Takeaways
 
 By the end of this workshop you will have learned the following:
 
+<!--
 - Container basics and essential _Docker_ commands
 - How to create a _Dockerfile_ to containerize your application
 - How to push your container to Amazon Elastic Container Registry (ECR)
 - How to deploy a container to App Runner
 - How to deploy an App Runner service using a custom VPC connector
 - How to use observability tools such as AWS X-Ray and CloudWatch to see application metrics
+-->
 
 
 ## Table of contents
 
 0. [Start the workshop](/start-workshop.md)
-1. [Docker basics](/docker-basics.md)
-2. [Practical Dockerfile](/dockerfile-practice.md)
-3. [ECR](/ecr.md)
-4. [Deploy to App Runner](/apprunner-service.md)
-5. [Auto Scaling](/autoscaling.md)
-6. [Observability](/observability.md)
+<!--
+** P'Jade **
+- Workshop Studio instructions 
+- Setting up Apps 
+- Install the Cron manifest
+- Install EBS CSI Add-on
+- Install HPA Add-on
+- Checking that the app works
+-->
+1. [Upgrade planning and preparations](/prepare.md)
+<!-- 
+** Yo **
+- Install Kube no trouble + show PSP & Cron will be obsolete
+- Use Kubeconvert to convert the Cron manifest
+  * Dump manifest for Cron & HPA
+  * Run kubeconvert for Cron & HPA
+  * Apply update for Cron manifest (v1.25 does not support Cron Beta API)
+- Check add-ons (use EBS CSI AWS Managed Add-on as an example
+  * Open EBS CSI add-on release note to verify that the target upgrade version will be supported
+- Check MNG worker node version
+  * kubectl get node
+-->
+2. [EKS Upgrade](/eks-upgrade.md)
+<!-- 
+** Pup **
+- Note: to backup before performing the upgrade (e.g. use Velero)
+- Upgrade control plane
+- Upgrade data plane
+  * Show configure PDB
+  * Upgrade data plane
+  * Show app zero downtime: 1/ at least one pod still available 2/ app can respond to traffic
+** P'Joe **
+- Check/verify that add-ons are still working & upgrade add-ons
+  * Show add-on functional
+  * Can upgrade add-ons in this step
+- Upgrade applications
+  * Candidate to show applying HPA manifest update
+- Post-check
+  * Check cluster version
+  * Check data plane
+  * Check application working as expected
+-->
