@@ -57,7 +57,8 @@ By the end of this workshop you will have learned the following:
 -->
 2. [EKS Upgrade](/eks-upgrade.md)
 <!-- 
-** Pup **
+** Pup ** Jade comment > Note sure that step should be according to this : https://aws.github.io/aws-eks-best-practices/upgrades/ under topics :               Under topic : Upgrade your control plane and data plane in sequence¶
+           Deprecated API Using KubeNT > Control Plane > Add on > Data Plane
 - Note: to backup before performing the upgrade (e.g. use Velero)
 - Upgrade control plane
 - Upgrade data plane
