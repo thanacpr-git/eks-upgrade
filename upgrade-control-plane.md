@@ -25,3 +25,12 @@ Please note that if we run `kubent` now, it will show a PodSecurityPolicy called
 5. After the upgrade is finish, the **Status** will change to "Active". The **Kubernetes version** will display the upgraded version. The process of the Control Plan upgrade has been completed.
 
    ![assets](/assets/cp-5-update-complete.jpg)
+
+Please note that if we run `kubectl get psp eks.privileged` now, 
+```sh
+kubectl get psp eks.privileged
+```
+the psp no longer exists in our cluster. For example,
+```
+error: the server doesn't have a resource type "psp"
+```
