@@ -32,7 +32,10 @@ By the end of this workshop you will have learned the following:
 
 ## Table of contents
 
-0. [Start the workshop](/start-workshop.md)
+<ol> 
+  <li>[Start the workshop](/start-workshop.md)</li>
+
+ 
 <!--
 ** P'Jade **
 - Workshop Studio instructions 
@@ -42,7 +45,7 @@ By the end of this workshop you will have learned the following:
 - Install HPA Add-on
 - Checking that the app works
 -->
-1. [Upgrade planning and preparations](/prepare.md)
+  <li>[Upgrade planning and preparations](/prepare.md)</li>
 <!-- 
 ** Yo **
 - Install Kube no trouble + show PSP & Cron will be obsolete
@@ -55,9 +58,13 @@ By the end of this workshop you will have learned the following:
 - Check MNG worker node version
   * kubectl get node
 -->
-2. [EKS Upgrade](/eks-upgrade.md)
+  </li>EKS Upgrade</li>
+  <ol>
+    <li>[Upgrade control plane](/upgrade-control-plane.md)</li>
+    <li>[Upgrade data plane](/upgrade-data-plane.md)</li>
+  </ol>
 <!-- 
-** Pup ** Jade comment > Note sure that step should be according to this : https://aws.github.io/aws-eks-best-practices/upgrades/ under topics :               Under topic : Upgrade your control plane and data plane in sequence¶
+** Joe ** Jade comment > Note sure that step should be according to this : https://aws.github.io/aws-eks-best-practices/upgrades/ under topics :               Under topic : Upgrade your control plane and data plane in sequence¶
            Deprecated API Using KubeNT > Control Plane > Add on > Data Plane
 - Note: to backup before performing the upgrade (e.g. use Velero)
 - Upgrade control plane
@@ -65,7 +72,7 @@ By the end of this workshop you will have learned the following:
   * Show configure PDB
   * Upgrade data plane
   * Show app zero downtime: 1/ at least one pod still available 2/ app can respond to traffic
-** P'Joe **
+** Pup **
 - Check/verify that add-ons are still working & upgrade add-ons
   * Show add-on functional
   * Can upgrade add-ons in this step
@@ -76,3 +83,4 @@ By the end of this workshop you will have learned the following:
   * Check data plane
   * Check application working as expected
 -->
+</ol>
