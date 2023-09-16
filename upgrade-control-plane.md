@@ -4,7 +4,7 @@ In this lab, we will upgrade the Control Plane.
 
 1. Navigate to the App Runner console to create a new service
 
-   ![assets](/assets/navigate-to-apprunner.png)
+   ![assets](/assets/aws-logo.jpg)
 
 2. Select **Create an App Runner Service**
 
