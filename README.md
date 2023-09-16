@@ -32,8 +32,7 @@ By the end of this workshop you will have learned the following:
 
 ## Table of contents
 
-<ol> 
-  <li>[Start the workshop](/start-workshop.md)</li>
+1. [Start the workshop](/start-workshop.md)
 
  
 <!--
@@ -45,7 +44,7 @@ By the end of this workshop you will have learned the following:
 - Install HPA Add-on
 - Checking that the app works
 -->
-  <li>[Upgrade planning and preparations](/prepare.md)</li>
+2. [Upgrade planning and preparations](/prepare.md)
 <!-- 
 ** Yo **
 - Install Kube no trouble + show PSP & Cron will be obsolete
@@ -58,11 +57,10 @@ By the end of this workshop you will have learned the following:
 - Check MNG worker node version
   * kubectl get node
 -->
-  <li>EKS Upgrade</li>
-  <ol>
-    <li><a href="/upgrade-control-plane.md">Upgrade control plane</a></li>
-    <li><a href="/upgrade-data-plane.md">Upgrade data plane</a>
-  </ol>
+3. EKS Upgrade
+
+   1. [Upgrade control plane](/upgrade-control-plane.md")
+   2. [Upgrade data plane](/upgrade-data-plane.md)
 <!-- 
 ** Joe ** Jade comment > Note sure that step should be according to this : https://aws.github.io/aws-eks-best-practices/upgrades/ under topics :               Under topic : Upgrade your control plane and data plane in sequence¶
            Deprecated API Using KubeNT > Control Plane > Add on > Data Plane
@@ -83,4 +81,3 @@ By the end of this workshop you will have learned the following:
   * Check data plane
   * Check application working as expected
 -->
-</ol>
