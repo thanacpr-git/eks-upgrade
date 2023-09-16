@@ -59,7 +59,7 @@ By the end of this workshop you will have learned the following:
 -->
 3. EKS Upgrade
 
-   1. [Upgrade control plane](/upgrade-control-plane.md")
+   1. [Upgrade control plane](/upgrade-control-plane.md)
    2. [Upgrade data plane](/upgrade-data-plane.md)
 <!-- 
 ** Joe ** Jade comment > Note sure that step should be according to this : https://aws.github.io/aws-eks-best-practices/upgrades/ under topics :               Under topic : Upgrade your control plane and data plane in sequence¶
