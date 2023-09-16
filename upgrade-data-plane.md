@@ -1,8 +1,7 @@
 # Upgrade Data Plane
 
 In this lab, we will upgrade the Data Plane of our Amazon EKS in AWS console.
-
-To achive zero downtime for our application, we can utilize **Pod Disruption Budgets (PDBs)**. 
+We will utilize **Pod Disruption Budgets (PDBs)** to achive zero downtime for our application.
 [PDBs](https://kubernetes.io/docs/tasks/run-application/configure-pdb/) are used to define,
 at any given time, how many replicas of a pod must be available (`minAvailable`) or can be unavailable (`maxUnavailable`).
 
@@ -19,8 +18,8 @@ at any given time, how many replicas of a pod must be available (`minAvailable`)
    proddetail    1/1     1            1           9h
    ```
 
-2. Assume that each Deployment must have 1 pod available during the Data Plane upgrade.
-Scale out the Deployment to have more than 1 replica, for example 3 replicas
+2. Suppose each Deployment must have 1 pod available during the Data Plane upgrade.
+Scale out the Deployment to have more than 1 replica, for example, 3 replicas
    ```sh
    kubectl scale --replicas=3 deployment frontend -n workshop
    kubectl scale --replicas=3 deployment prodcatalog -n workshop
@@ -91,9 +90,9 @@ Scale out the Deployment to have more than 1 replica, for example 3 replicas
    proddetail-pdb    1               N/A               2                     11s
    ```
 
-5. Set up the monitoring of the application in the Cloud9 terminals to ensure the zero-downtime
+5. Set up an application monitoring in the Cloud9 terminals to verify the zero-downtime
 
-   Open a new terminal and run the command to monitor the pods
+   Open a new terminal and run the command below to monitor the pods
    ```sh
    kubectl get pod -n workshop -w
    ```
@@ -118,7 +117,7 @@ to view the version number in the **AMI release version** column
 
    ![assets](/assets/dp-3-compute-tab.jpg)
 
-9. Click "Update now" next to the version number. A new window will pop up, showing the "Rolling update" strategy. Click "Update" to confirm
+9. Click "Update now" next to the version number. A new window will pop up, showing the "Rolling update" strategy. Click "Update" to confirm.
 
    ![assets](/assets/dp-4-update-confirm.jpg)
 
@@ -126,8 +125,7 @@ to view the version number in the **AMI release version** column
 
     ![assets](/assets/dp-5-during-update.jpg)
  
-    You can monitor the pod upgrade activities in the Cloud9 terminals, for example,
-    While the pods are terminated and re-created, for example,
+    In the Cloud9 terminals, while the pods are terminated and re-created, for example,
     ```
     ...
     frontend-765f57cd79-xvd7t      1/1     Running             0          46s
@@ -148,7 +146,7 @@ to view the version number in the **AMI release version** column
     ...
     ```
 
-    Our application continues running without interruption, for example,
+    our application are running without interruption, for example,
     ```
     ...
     OK -- Sat Sep 16 22:51:42 UTC 2023
