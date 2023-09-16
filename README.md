@@ -58,10 +58,10 @@ By the end of this workshop you will have learned the following:
 - Check MNG worker node version
   * kubectl get node
 -->
-  </li>EKS Upgrade</li>
+  <li>EKS Upgrade</li>
   <ol>
-    <li>[Upgrade control plane](/upgrade-control-plane.md)</li>
-    <li>[Upgrade data plane](/upgrade-data-plane.md)</li>
+    <li><a href="/upgrade-control-plane.md">Upgrade control plane</a></li>
+    <li><a href="/upgrade-data-plane.md">Upgrade data plane</a>
   </ol>
 <!-- 
 ** Joe ** Jade comment > Note sure that step should be according to this : https://aws.github.io/aws-eks-best-practices/upgrades/ under topics :               Under topic : Upgrade your control plane and data plane in sequence¶
