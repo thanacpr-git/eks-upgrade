@@ -4,7 +4,11 @@ In this lab, we will upgrade the Control Plane of our Amazon EKS in AWS console.
 
 Please note that if we run `kubent` now, it will show a PodSecurityPolicy called "eks.privileged". As stated in [Pod security policy (PSP) removal FAQ](https://docs.aws.amazon.com/eks/latest/userguide/pod-security-policy-removal-faq.html), Amazon EKS automatically migrates this PSP to a PSS-based enforcement. *No action is needed on your part*. 
 
-![assets](/assets/cp-0-psp-removal.jpg)
+![assets](/assets/cp-0-psp-removal-1030w.jpg)
+
+![assets](/assets/cp-0-psp-removal-700w.jpg)
+
+![assets](/assets/cp-0-psp-removal-500w.jpg)
 
 1. Start the Control Plan upgrade by navigating to Amazon EKS console 
 
