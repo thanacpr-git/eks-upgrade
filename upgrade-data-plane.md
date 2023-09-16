@@ -2,25 +2,22 @@
 
 In this lab, we will upgrade the Data Plane of our Amazon EKS in AWS console.
 
-To achive zero downtime of our application when upgrading the Data Plane, 
-we can utilize **Pod Disruption Budgets (PDBs)**. 
-[PDBs](https://kubernetes.io/docs/tasks/run-application/configure-pdb/) are used to define
-at any given time, how many replicas of a pod can be unavailable (`maxUnavailable`), 
-or how many replicas of a pod must be available (`minAvailable`).
+To achive zero downtime of our application, we can utilize **Pod Disruption Budgets (PDBs)**. 
+[PDBs](https://kubernetes.io/docs/tasks/run-application/configure-pdb/) are used to define,
+at any given time, how many replicas of a pod must be available (`minAvailable`) or can be unavailable (`maxUnavailable`).
 
 1. View the number of replicas of our application in the cluster
+   ```sh
+   kubectl get deploy -n workshop
+   ```
 
-```sh
-kubectl get deploy -n workshop
-```
-
-Currently, all Deployments have only 1 replica.
-```
-NAME          READY   UP-TO-DATE   AVAILABLE   AGE
-frontend      1/1     1            1           9h
-prodcatalog   1/1     1            1           9h
-proddetail    1/1     1            1           9h
-```
+   Currently, all Deployments have only 1 replica.
+   ```
+   NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+   frontend      1/1     1            1           9h
+   prodcatalog   1/1     1            1           9h
+   proddetail    1/1     1            1           9h
+   ```
 
 2. Assume that we need at least 1 pod of each Deployment during the Data Plane upgrade, 
 scale each Deployment to have 3 replicas
@@ -43,50 +40,49 @@ scale each Deployment to have 3 replicas
    proddetail    3/3     3            3           10h
    ```
 3. Create PDBs for each type of pods to have `minAvailable` of 1
-
-```sh
-cat <<EoF | kubectl apply -f -
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: frontend-pdb
-  namespace: workshop
-spec:
-  minAvailable: 1
-  selector:
-    matchLabels:
-      app: frontend
----
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: prodcatalog-pdb
-  namespace: workshop
-spec:
-  minAvailable: 1
-  selector:
-    matchLabels:
-      app: prodcatalog
----
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: proddetail-pdb
-  namespace: workshop
-spec:
-  minAvailable: 1
-  selector:
-    matchLabels:
-      app: proddetail
-EoF
-```
+   ```sh
+   cat <<EoF | kubectl apply -f -
+   apiVersion: policy/v1
+   kind: PodDisruptionBudget
+   metadata:
+     name: frontend-pdb
+     namespace: workshop
+   spec:
+     minAvailable: 1
+     selector:
+       matchLabels:
+         app: frontend
+   ---
+   apiVersion: policy/v1
+   kind: PodDisruptionBudget
+   metadata:
+     name: prodcatalog-pdb
+     namespace: workshop
+   spec:
+     minAvailable: 1
+     selector:
+       matchLabels:
+         app: prodcatalog
+   ---
+   apiVersion: policy/v1
+   kind: PodDisruptionBudget
+   metadata:
+     name: proddetail-pdb
+     namespace: workshop
+   spec:
+     minAvailable: 1
+     selector:
+       matchLabels:
+         app: proddetail
+   EoF
+   ```
 
 4. Check the status of the PDB
    ```sh
    kubectl get pdb -n workshop
    ```
 
-   Because of 3 replicas and `minAvailable` of 1, each PDB has "allowed disruption" of 2, for example
+   Because of 3 replicas and `minAvailable` of 1, each PDB has " ALLOWED DISRUPTIONS" of 2, for example,
    ```
    NAME              MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
    frontend-pdb      1               N/A               2                     11s
@@ -117,21 +113,21 @@ EoF
    ![assets](/assets/dp-2-view-cluster.jpg)
 
 8. Click the **Compute** tab and scroll down to the **Node groups** section
+to view the version number in the **AMI release version** column
 
    ![assets](/assets/dp-3-compute-tab.jpg)
 
-9. Click "Update now" next to the version number of the Node groups (in the **AMI release version** column) 
+9. Click "Update now" next to the version number
 
 10. A new window will pop up, showing the "Rolling update" strategy. Click "Update" to confirm
 
    ![assets](/assets/dp-4-update-confirm.jpg)
 
-11. The **Status** will display "Updating". The time to update the Data Plan depends on the size of the cluster. For this lab, it takes approximately 17 minutes. You may click the refresh button to refresh the page for the latest status.
-
-   You may also monitor the upgrade activities and the status of the application in the Cloud9 terminals
+11. The **Status** will display "Updating". The time to update the Data Plan depends on the size of the cluster. For this lab, it takes approximately 17 minutes. You may click the refresh button to refresh the page for the latest status. 
 
    ![assets](/assets/dp-5-during-update.jpg)
-
+ 
+   You can monitor the pod upgrade activities in the Cloud9 terminals, for example,
    While the pods are terminated and re-created, for example,
    ```
    ...
@@ -153,7 +149,7 @@ EoF
    ...
    ```
 
-   our application continues running without interruption, for example,
+   Our application continues running without interruption, for example,
 
    ```
    ...
