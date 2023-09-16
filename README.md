@@ -6,9 +6,9 @@
 
 Welcome to the **EKS Upgrade** workshop. This workshop aims to share recommended practice and hands-on step for EKS upgrade operation. Customer will learn how to upgrade EKS cluster from EKS version 1.24 to 1.25 with example Kubernetes application to demonstrate step that need to check before performing the upgrade. 
 
-The workshop is structured into two parts: Upgrade planning, and Implement Amazon EKS upgrade.
+The workshop is structured into two parts: Planning and preparation, and Implement Amazon EKS upgrade.
 
-### Upgrade Planning
+### Planning
 
 The first part of our workshop provides ...
 
