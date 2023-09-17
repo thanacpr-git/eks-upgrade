@@ -1,4 +1,6 @@
 By participating in this workshop you will be provided with an AWS account to use to complete the lab material. Connect to the portal by browsing to https://catalog.workshops.aws/. Click on Get Started.
+![http catalog]
+(https://www.eksworkshop.com/assets/images/workshop-studio-home-ee08e612fd0a646451211731ad813b7f.png)
 
 ### Workshop Studio Home
 
