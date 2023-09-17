@@ -6,13 +6,13 @@
 
 Welcome to the **EKS Upgrade** workshop. This workshop aims to share recommended practice and hands-on step for EKS upgrade operation. Customer will learn how to upgrade EKS cluster from EKS version 1.24 to 1.25 with example Kubernetes application to demonstrate step that need to check before performing the upgrade. 
 
-The workshop is structured into three parts: Cluster Setup , Planning Phase , and Performing Upgrade Phase : .
+The workshop is structured into three parts: Start the workshop , Upgrade planning and preparations , and Implement EKS Upgrade : .
 
-### Cluster Setup
+### Start the workshop
 
 In this section , New EKS Cluster need to be created and deploy withsample application that will be used throughout the workshop.
 
-### Planning
+### Upgrade planning and preparations
 
 The first part of our workshop provides the procedure before perform EKS Upgrade such as Deprecated API , AWS Managed AddOn Version compatibility and helper tools that can be used to shorten the preparation process.
 
