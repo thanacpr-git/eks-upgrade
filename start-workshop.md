@@ -56,13 +56,14 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     ```
     kubectl get --namespace workshop svc -w frontend
     ```
+
 ### [3] Deploy test application on EKS Cluster
 
 - Deploy Cronjob
 
     ```
     cd ~/environment 
-    cat << EoF > ${HOME}/environment/my-cj.yaml
+    cat << EoF > ~/environment/my-cj.yaml
 
 
     apiVersion: batch/v1beta1
@@ -92,7 +93,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     cronjob.batch/hello created
     ```
 
-- Check cronjob schedule and log kubernetes pod to verify that job run successfully
+- Check cronjob schedule and log in kubernetes pod to verify that job run successfully
 
     ```
     k get cj
@@ -113,7 +114,67 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     Mon Sep 11 01:20:00 UTC 2023
     Hello from the Kubernetes cluster
     ```
+- Deploy Metric Server
 
+    ```
+    kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+    Verify Status the status of the metrics-server APIService (This can take few minutes).
+
+    kubectl get apiservice v1beta1.metrics.k8s.io -o json | jq '.status'
+
+    {
+    "conditions": [
+        {
+        "lastTransitionTime": "2020-11-10T06:39:13Z",
+        "message": "all checks passed",
+        "reason": "Passed",
+        "status": "True",
+        "type": "Available"
+        }
+    ]
+    }
+    ```
+
+- Verify that Metric server run successfully , CPU and Meory will be displayed from below command : 
+
+    ```
+    k top node
+
+    88665a14a1b4:~ thanacpr$ k top node
+    NAME                                                     CPU(cores)   CPU%        MEMORY(bytes)   MEMORY%     
+    ip-10-0-23-233.ap-southeast-1.compute.internal           645m         33%         964Mi           13%         
+    ip-10-0-43-103.ap-southeast-1.compute.internal           610m         31%         1039Mi          14%   
+    ```
+
+
+- Deploy Horizontal Pod Autoscaler :
+
+    ```
+    cd ~/environment 
+    cat << EoF > ${HOME}/environment/hpa_proddetail.yaml
+    apiVersion: autoscaling/v2beta1
+    kind: HorizontalPodAutoscaler
+    metadata:
+    name: proddetail
+    namespace: workshop
+    spec:
+    maxReplicas: 3
+    metrics:
+    - resource:
+        name: cpu
+        targetAverageUtilization: 40
+        type: Resource
+    minReplicas: 1
+    scaleTargetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: proddetail
+    EoF
+
+    k apply -f ~/environment/hpa_proddetail.yaml
+    ```    
+   
     
 <!--By participating in this workshop you will be provided with an AWS account to use to complete the lab material. Connect to the portal by browsing to https://catalog.workshops.aws/. Click on <strong>Get Started.</strong>
 
