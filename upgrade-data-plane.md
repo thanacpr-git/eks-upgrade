@@ -178,7 +178,22 @@ to view the version number in the **AMI release version** column
     kubectl scale --replicas=1 deployment proddetail -n workshop
     ```
 
-**Note that** before we upgraded the Data Plane, if PDBs have "ALLOWED DISRUPTIONS" = 0 (for example, in this case, we did not scale out the number of replicas from 1 to make "ALLOWED DISRUPTIONS" be greater than 1), upgrading the Data Plan will never finish (**Status** will stay at "Updating"). Checking the number of nodes shows that they cannot be terminated, for example, 
+**Note that** before we upgraded the Data Plane, if PDBs have "ALLOWED DISRUPTIONS" = 0, for example, 
+   ```sh
+   kubectl get pdb -n workshop
+   ```
+
+aaa
+
+```sh
+NAME              MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
+frontend-pdb      1               N/A               0                     14s
+prodcatalog-pdb   1               N/A               0                     14s
+proddetail-pdb    1               N/A               0                     14s
+```
+
+
+in this case, we did not scale out the number of replicas from 1 to make "ALLOWED DISRUPTIONS" be greater than 1), upgrading the Data Plan will never finish (**Status** will stay at "Updating"). Checking the number of nodes shows that they cannot be terminated, for example, 
     ```sh
     node not terminted
     ```
