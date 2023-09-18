@@ -1,7 +1,7 @@
 Before proceeding with Planning and Upgrade , please follow workshop set up instruction from <strong>Option 1 (Preferred): Running the workshop using Workshop Studio for AWS events</strong> in https://catalog.workshops.aws/eks-immersionday/en-US/introduction. Recheck that EKS cluster and Cloud 9 has been set up properly. 
 
 
-By participating in this workshop you will be provided with an AWS account to use to complete the lab material. Connect to the portal by browsing to https://catalog.workshops.aws/. Click on <strong>Get Started.</strong>
+<!--By participating in this workshop you will be provided with an AWS account to use to complete the lab material. Connect to the portal by browsing to https://catalog.workshops.aws/. Click on <strong>Get Started.</strong>
 
 ![Https catalog](https://www.eksworkshop.com/assets/images/workshop-studio-home-ee08e612fd0a646451211731ad813b7f.png)
 
@@ -41,6 +41,7 @@ Next return to the personal dashboard page and scroll down to the Event Outputs 
 ![Https browser](https://www.eksworkshop.com/assets/images/cloud9-2c554c978c7b41b25864558666aeef89.png)
 
 ### Cloud9 Link
+-->
 
 Press Get started to access the workshop splash page:
 
