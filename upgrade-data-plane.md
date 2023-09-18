@@ -90,42 +90,33 @@ Scale out the Deployment to have more than 1 replica, for example, 3 replicas
    proddetail-pdb    1               N/A               2                     11s
    ```
 
-5. Set up an application monitoring in the Cloud9 terminals to verify the zero-downtime
-
-   Open a new terminal and run the command below to monitor the pods
-   ```sh
-   kubectl get pod -n workshop -w
-   ```
-
-   Open another terminal and run the command below to cURL the application
-   ```sh
-   while true; do export LB_NAME=$(kubectl get svc frontend -n workshop -o jsonpath="{.status.loadBalancer.ingress[*].hostname}");  curl -s -o /dev/null ${LB_NAME};
-     if [ $? -eq 0 ]; then echo "OK -- $(date)"; else echo "NOT-OK -- $(date)"; fi
-   done
-   ```
-
-6. Navigate to Amazon EKS console to upgrade the Data Plane 
+5. Navigate to Amazon EKS console to upgrade the Data Plane 
 
    ![assets](/assets/cp-1-eks-console.jpg)
 
-7. Click **Clusters** on the left-pane and click the **Cluster name** "eksworkshop-eksctl"
+6. Click **Clusters** on the left-pane and click the **Cluster name** "eksworkshop-eksctl"
 
    ![assets](/assets/dp-2-view-cluster.jpg)
 
-8. Click the **Compute** tab and scroll down to the **Node groups** section
+7. Click the **Compute** tab and scroll down to the **Node groups** section
 to view the version number in the **AMI release version** column
 
    ![assets](/assets/dp-3-compute-tab.jpg)
 
-9. Click "Update now" next to the version number. A new window will pop up, showing the "Rolling update" strategy. Click "Update" to confirm.
+8. Click "Update now" next to the version number. A new window will pop up, showing the "Rolling update" strategy. Click "Update" to confirm.
 
    ![assets](/assets/dp-4-update-confirm.jpg)
 
-10. The **Status** will display "Updating". The time to update the Data Plan depends on the size of the cluster. For this lab, it takes approximately 17 minutes. You may click the refresh button to refresh the page for the latest status. 
+9. The **Status** will display "Updating". The time to update the Data Plan depends on the size of the cluster. For this lab, it takes approximately 17 minutes. You may click the refresh button to refresh the page for the latest status. 
 
-    ![assets](/assets/dp-5-during-update.jpg)
- 
-    In the Cloud9 terminals, while the pods are terminated and re-created, for example,
+   ![assets](/assets/dp-5-during-update.jpg)
+
+10. We can monitor our application in Cloud9. Open a new terminal in Cloud9 and run the command below to monitor the pods.
+    ```sh
+    kubectl get pod -n workshop -w
+    ```
+
+    The pods will be terminated and re-created, for example,
     ```
     ...
     frontend-765f57cd79-xvd7t      1/1     Running             0          46s
@@ -146,7 +137,16 @@ to view the version number in the **AMI release version** column
     ...
     ```
 
-    our application are running without interruption, for example,
+11. In order to verify zero-downtime, open another terminal in Cloud9 and run the command below to cURL the application
+    ```sh
+    export LB_NAME=$(kubectl get svc frontend -n workshop -o jsonpath="{.status.loadBalancer.ingress[*].hostname}");
+    while true; do curl -s -o /dev/null ${LB_NAME};
+      if [ $? -eq 0 ]; then echo "OK -- $(date)"; else echo "NOT-OK -- $(date)"; fi
+      sleep 1;
+    done
+    ```
+
+    The scipt first gets the DNS of Load Balancer and then runs infinite while-loop to cURL the DNS. If the application is up, it will echo OK with a timestamp.  If the application is down, it will echo NOT-OK with a timestamp.  With PDBs, our application is running without interruption. The expected output is shown below, for example,
     ```
     ...
     OK -- Sat Sep 16 22:51:42 UTC 2023
@@ -160,18 +160,28 @@ to view the version number in the **AMI release version** column
     ...
     ```
 
-11. After the upgrade is finish, the **Status** will change to "Active". The **AMI release version** will display the upgraded version. The process of the Data Plan upgrade has been completed.
+12. After the upgrade is finish, the **Status** will change to "Active". The **AMI release version** will display the upgraded version. The process of the Data Plan upgrade has been completed.
 
     ![assets](/assets/dp-6-update-complete.jpg)
 
-12. Delete the PDBs and scale in the deployments to 1 pod
-
+13. Recall that the PDBs were configured before we upgrade the Data Plane for the purpose of zero-downtime. Unless we have requirements to preserve them, delete the PDBs.
     ```sh
     kubectl delete pdb frontend-pdb -n workshop
     kubectl delete pdb prodcatalog-pdb -n workshop
     kubectl delete pdb proddetail-pdb -n workshop
+    ````
 
+14. In addition, we scaled up the number of replicas of all deployments to 3 pods so that PDBs will have "ALLOWED DISRUPTIONS" greater than 1. Unless we have requirements to maintain 3 pods, scale in the deployments to 1 pod.
+    ```sh    
     kubectl scale --replicas=1 deployment frontend -n workshop
     kubectl scale --replicas=1 deployment prodcatalog -n workshop
     kubectl scale --replicas=1 deployment proddetail -n workshop
     ```
+
+**Note** When we upgrade the Data Plane, if PDBs have "ALLOWED DISRUPTIONS" = 0 (for example, in this case, we did not scale up the number of replicas from 1 to make "ALLOWED DISRUPTIONS" be greater than 1), upgrading the Data Plan will never finish. Checking the number of nodes shows that they cannot be terminated, for example, 
+    ```sh
+    node not terminted
+    ````
+
+The solution here is to scale up the number of replicas to make "ALLOWED DISRUPTIONS" be greater than 1 to achive zero-downtime.  Or, delete PDBs and our application will be interrupt.
+   
