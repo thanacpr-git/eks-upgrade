@@ -41,29 +41,28 @@ By the end of this workshop you will have learned the following:
 
  
 <!--
-** P'Jade **
+** P'Jade/Pup **
 - Workshop Studio instructions 
 - Setting up Apps 
 - Install the Cron manifest
-- [Removed --> Install EBS CSI Add-on]
 - Install HPA Add-on
 - Checking that the app works
 -->
 2. [Upgrade planning and preparations](/prepare.md)
 <!-- 
-** Yo **
+** Bo **
+- Install kubectl +/- 1 from cluster's
 - Install Kube no trouble + show PSP & Cron will be obsolete
 - Use Kubeconvert to convert the Cron manifest
   * Dump manifest for Cron & HPA
   * Run kubeconvert for Cron & HPA
-  * Apply update for Cron manifest (v1.25 does not support Cron Beta API)
-- Check add-ons (use EBS CSI AWS Managed Add-on as an example
-  * Open EBS CSI add-on release note to verify that the target upgrade version will be supported
+  * Apply update for Cron manifest & (HPA) (v1.25 does not support Cron/HPA Beta API)
 - Check MNG worker node version
   * kubectl get node
+- Check k8s versions (both client and cluster)  
+  * kubectl version short
 -->
 3. EKS Upgrade
-
    1. [Upgrade control plane](/upgrade-control-plane.md)
    2. [Upgrade data plane](/upgrade-data-plane.md)
 <!-- 
@@ -75,12 +74,6 @@ By the end of this workshop you will have learned the following:
   * Show configure PDB
   * Upgrade data plane
   * Show app zero downtime: 1/ at least one pod still available 2/ app can respond to traffic
-** Pup **
-- [Remove -> Check/verify that add-ons are still working & upgrade add-ons]
-  [Remove -> * Show add-on functional]
-  [Remove -> * Can upgrade add-ons in this step]
-- Upgrade applications
-  * Candidate to show applying HPA manifest update
 - Post-check
   * Check cluster version
   * Check data plane
