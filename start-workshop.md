@@ -41,10 +41,12 @@ Next return to the personal dashboard page and scroll down to the Event Outputs 
 ![Https browser](https://www.eksworkshop.com/assets/images/cloud9-2c554c978c7b41b25864558666aeef89.png)
 
 ### Cloud9 Link
--->
 
 Press Get started to access the workshop splash page:
 
 ![Https page](https://www.eksworkshop.com/assets/images/workshop-event-page-7391a20bc4599267ffb82643b0b3f3fc.png)
 
 You can now proceed to the <strong>Navigating</strong> the labs section.
+
+-->
+
