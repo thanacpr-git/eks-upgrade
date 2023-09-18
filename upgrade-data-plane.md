@@ -200,7 +200,7 @@ Checking the number of nodes
 kubectl get no
 ```
 
-shows that the nodes of the new version (v1.25) are "Ready", but the nodes of the old version (v1.24) they cannot be terminated, for example, 
+shows that the nodes of the new version (v1.25) are "Ready", but the nodes of the old version (v1.24) cannot be terminated, for example, 
 ```sh
 NAME                              STATUS                     ROLES    AGE    VERSION
 ip-192-168-100-22.ec2.internal    Ready,SchedulingDisabled   <none>   105m   v1.24.16-eks-8ccc7ba
@@ -211,7 +211,15 @@ ip-192-168-161-112.ec2.internal   Ready                      <none>   43s    v1.
 ip-192-168-191-84.ec2.internal    Ready,SchedulingDisabled   <none>   105m   v1.24.16-eks-8ccc7ba
 ```
 
-In this scenario, the solution is to scale out the number of replicas to make "ALLOWED DISRUPTIONS" be greater than 1 to achive zero-downtime.  Or, delete PDBs at the expense of interrupting our application. For example,
+In this scenario, the solution is to scale out the number of replicas to make "ALLOWED DISRUPTIONS" be greater than 1 to achive zero-downtime.  Or, delete PDBs at the expense of interrupting our application. The Data Plane will finally be upgraded, for example,
 ```sh
+NAME                              STATUS   ROLES    AGE   VERSION
+ip-192-168-102-250.ec2.internal   Ready    <none>   17m   v1.25.12-eks-8ccc7ba
+ip-192-168-132-107.ec2.internal   Ready    <none>   17m   v1.25.12-eks-8ccc7ba
+ip-192-168-161-112.ec2.internal   Ready    <none>   17m   v1.25.12-eks-8ccc7ba
 ```
+
+The Data Plane upgrade can also be verified in the Amazon Console
+
+![assets](/assets/dp-7-update-complete.jpg)
 
