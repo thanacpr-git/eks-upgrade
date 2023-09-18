@@ -32,7 +32,9 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     ```
     cd ~/environment/eks-app-mesh-polyglot-demo
     helm install workshop ~/environment/eks-app-mesh-polyglot-demo/workshop/helm-chart/
-
+    ```
+    **Output**
+    ```
     NAME: workshop
     LAST DEPLOYED: Mon Sep 11 00:56:04 2023
     NAMESPACE: default
@@ -64,31 +66,30 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     ```
     cd ~/environment 
     cat << EoF > ~/environment/my-cj.yaml
-
-
     apiVersion: batch/v1beta1
     kind: CronJob
     metadata:
-    name: hello
+      name: hello
     spec:
-    schedule: "* * * * *"
-    jobTemplate:
+      schedule: "* * * * *"
+      jobTemplate:
         spec:
-        template:
+          template:
             spec:
-            containers:
-            name: hello
+              containers:
+              - name: hello
                 image: busybox:1.28
                 imagePullPolicy: IfNotPresent
                 command:
-                  /bin/sh
-                  -c
-                  date; echo Hello from the Kubernetes cluster
-            restartPolicy: OnFailure
+                - /bin/sh
+                - -c
+                - date; echo Hello from the Kubernetes cluster
+              restartPolicy: OnFailure
     EoF
     k apply -f ~/environment/my-cj.yaml
-
-
+    ```
+    Dismiss the output below
+    ```
     Warning: batch/v1beta1 CronJob is deprecated in v1.21+, unavailable in v1.25+; use batch/v1 CronJob
     cronjob.batch/hello created
     ```
@@ -97,20 +98,26 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
 
     ```
     k get cj
-
+    ```
+    Output
+    ```
     NAME    SCHEDULE    SUSPEND   ACTIVE   LAST SCHEDULE   AGE
     hello   * * * * *   False     0        22s             84s
-
-
+    ```
+    ```
     k get po
-
+    ```    
+    Output
+    ```
     NAME                   READY   STATUS      RESTARTS   AGE
     hello-28239919-72hvv   0/1     Completed   0          103s
     hello-28239920-w7w85   0/1     Completed   0          43s
-
-
+    ```
+    ```
     k logs hello-28239920-w7w85
-
+    ```
+    Output
+    ```
     Mon Sep 11 01:20:00 UTC 2023
     Hello from the Kubernetes cluster
     ```
@@ -118,11 +125,15 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
 
     ```
     kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-
+    ```
+    
     Verify Status the status of the metrics-server APIService (This can take few minutes).
 
+    ```
     kubectl get apiservice v1beta1.metrics.k8s.io -o json | jq '.status'
-
+    ```
+    Output
+    ```
     {
     "conditions": [
         {
@@ -140,8 +151,9 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
 
     ```
     k top node
-
-    88665a14a1b4:~ thanacpr$ k top node
+    ```
+    Output
+    ```
     NAME                                                     CPU(cores)   CPU%        MEMORY(bytes)   MEMORY%     
     ip-10-0-23-233.ap-southeast-1.compute.internal           645m         33%         964Mi           13%         
     ip-10-0-43-103.ap-southeast-1.compute.internal           610m         31%         1039Mi          14%   
@@ -153,28 +165,48 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     ```
     cd ~/environment 
     cat << EoF > ${HOME}/environment/hpa_proddetail.yaml
+
     apiVersion: autoscaling/v2beta1
     kind: HorizontalPodAutoscaler
     metadata:
-    name: proddetail
-    namespace: workshop
+      name: proddetail
+      namespace: workshop
     spec:
-    maxReplicas: 3
-    metrics:
-    - resource:
-        name: cpu
-        targetAverageUtilization: 40
+      maxReplicas: 3
+      metrics:
+      - resource:
+          name: cpu
+          targetAverageUtilization: 40
         type: Resource
-    minReplicas: 1
-    scaleTargetRef:
-        apiVersion: apps/v1
-        kind: Deployment
-        name: proddetail
+      minReplicas: 1
+      scaleTargetRef:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: proddetail
     EoF
-
     k apply -f ~/environment/hpa_proddetail.yaml
-    ```    
-   
+    ``` 
+
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: proddetail
+  namespace: workshop
+spec:
+  maxReplicas: 3
+  metrics:
+  - resource:
+      name: cpu
+      targetAverageUtilization: 40
+    type: Resource
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: proddetail
+EoF
+k apply -f ~/environment/hpa_proddetail.yaml
+```      
     
 <!--By participating in this workshop you will be provided with an AWS account to use to complete the lab material. Connect to the portal by browsing to https://catalog.workshops.aws/. Click on <strong>Get Started.</strong>
 
