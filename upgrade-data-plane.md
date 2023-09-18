@@ -164,9 +164,13 @@ to view the version number in the **AMI release version** column
 
     ![assets](/assets/dp-6-update-complete.jpg)
 
-12. Scale in the deployments to 1 pod
+12. Delete the PDBs and scale in the deployments to 1 pod
 
     ```sh
+    kubectl delete pdb frontend-pdb -n workshop
+    kubectl delete pdb prodcatalog-pdb -n workshop
+    kubectl delete pdb proddetail-pdb -n workshop
+
     kubectl scale --replicas=1 deployment frontend -n workshop
     kubectl scale --replicas=1 deployment prodcatalog -n workshop
     kubectl scale --replicas=1 deployment proddetail -n workshop
