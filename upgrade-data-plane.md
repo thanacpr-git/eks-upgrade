@@ -178,13 +178,12 @@ to view the version number in the **AMI release version** column
     kubectl scale --replicas=1 deployment proddetail -n workshop
     ```
 
-**Note that** before we upgraded the Data Plane, if PDBs have "ALLOWED DISRUPTIONS" = 0, for example, 
-   ```sh
-   kubectl get pdb -n workshop
-   ```
+**Note that** before we upgraded the Data Plane, if we did not scale out the number of replicas, and the status of PDBs 
+```sh
+kubectl get pdb -n workshop
+```
 
-aaa
-
+shows "ALLOWED DISRUPTIONS" = 0, for example,
 ```sh
 NAME              MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
 frontend-pdb      1               N/A               0                     14s
@@ -192,10 +191,27 @@ prodcatalog-pdb   1               N/A               0                     14s
 proddetail-pdb    1               N/A               0                     14s
 ```
 
+upgrading the Data Plan will never finish. That is, **Status** will stay at "Updating". 
 
-in this case, we did not scale out the number of replicas from 1 to make "ALLOWED DISRUPTIONS" be greater than 1), upgrading the Data Plan will never finish (**Status** will stay at "Updating"). Checking the number of nodes shows that they cannot be terminated, for example, 
-    ```sh
-    node not terminted
-    ```
+![assets](/assets/dp-5-during-update.jpg)
 
-In this scenario, the solution is to scale out the number of replicas to make "ALLOWED DISRUPTIONS" be greater than 1 to achive zero-downtime.  Or, delete PDBs at the expense of interrupting our application.
+Checking the number of nodes
+```sh
+kubectl get no
+```
+
+shows that the nodes of the new version (v1.25) are "Ready", but the nodes of the old version (v1.24) they cannot be terminated, for example, 
+```sh
+NAME                              STATUS                     ROLES    AGE    VERSION
+ip-192-168-100-22.ec2.internal    Ready,SchedulingDisabled   <none>   105m   v1.24.16-eks-8ccc7ba
+ip-192-168-102-250.ec2.internal   Ready                      <none>   42s    v1.25.12-eks-8ccc7ba
+ip-192-168-132-107.ec2.internal   Ready                      <none>   41s    v1.25.12-eks-8ccc7ba
+ip-192-168-132-235.ec2.internal   Ready,SchedulingDisabled   <none>   105m   v1.24.16-eks-8ccc7ba
+ip-192-168-161-112.ec2.internal   Ready                      <none>   43s    v1.25.12-eks-8ccc7ba
+ip-192-168-191-84.ec2.internal    Ready,SchedulingDisabled   <none>   105m   v1.24.16-eks-8ccc7ba
+```
+
+In this scenario, the solution is to scale out the number of replicas to make "ALLOWED DISRUPTIONS" be greater than 1 to achive zero-downtime.  Or, delete PDBs at the expense of interrupting our application. For example,
+```sh
+```
+
