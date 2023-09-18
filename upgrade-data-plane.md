@@ -171,17 +171,16 @@ to view the version number in the **AMI release version** column
     kubectl delete pdb proddetail-pdb -n workshop
     ````
 
-14. In addition, we scaled up the number of replicas of all deployments to 3 pods so that PDBs will have "ALLOWED DISRUPTIONS" greater than 1. Unless we have requirements to maintain 3 pods, scale in the deployments to 1 pod.
+14. In addition, we scaled out the number of replicas of all deployments to 3 pods so that PDBs will have "ALLOWED DISRUPTIONS" greater than 1. Unless we have requirements to maintain 3 pods, scale in the deployments to 1 pod.
     ```sh    
     kubectl scale --replicas=1 deployment frontend -n workshop
     kubectl scale --replicas=1 deployment prodcatalog -n workshop
     kubectl scale --replicas=1 deployment proddetail -n workshop
     ```
 
-**Note** When we upgrade the Data Plane, if PDBs have "ALLOWED DISRUPTIONS" = 0 (for example, in this case, we did not scale up the number of replicas from 1 to make "ALLOWED DISRUPTIONS" be greater than 1), upgrading the Data Plan will never finish. Checking the number of nodes shows that they cannot be terminated, for example, 
+**Note that** before we upgraded the Data Plane, if PDBs have "ALLOWED DISRUPTIONS" = 0 (for example, in this case, we did not scale out the number of replicas from 1 to make "ALLOWED DISRUPTIONS" be greater than 1), upgrading the Data Plan will never finish (**Status** will stay at "Updating"). Checking the number of nodes shows that they cannot be terminated, for example, 
     ```sh
     node not terminted
-    ````
+    ```
 
-The solution here is to scale up the number of replicas to make "ALLOWED DISRUPTIONS" be greater than 1 to achive zero-downtime.  Or, delete PDBs and our application will be interrupt.
-   
+In this scenario, the solution is to scale out the number of replicas to make "ALLOWED DISRUPTIONS" be greater than 1 to achive zero-downtime.  Or, delete PDBs at the expense of interrupting our application.
