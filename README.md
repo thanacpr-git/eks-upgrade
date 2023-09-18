@@ -45,7 +45,7 @@ By the end of this workshop you will have learned the following:
 - Workshop Studio instructions 
 - Setting up Apps 
 - Install the Cron manifest
-- Install EBS CSI Add-on
+- [Removed --> Install EBS CSI Add-on]
 - Install HPA Add-on
 - Checking that the app works
 -->
@@ -76,9 +76,9 @@ By the end of this workshop you will have learned the following:
   * Upgrade data plane
   * Show app zero downtime: 1/ at least one pod still available 2/ app can respond to traffic
 ** Pup **
-- Check/verify that add-ons are still working & upgrade add-ons
-  * Show add-on functional
-  * Can upgrade add-ons in this step
+- [Remove -> Check/verify that add-ons are still working & upgrade add-ons]
+  [Remove -> * Show add-on functional]
+  [Remove -> * Can upgrade add-ons in this step]
 - Upgrade applications
   * Candidate to show applying HPA manifest update
 - Post-check
