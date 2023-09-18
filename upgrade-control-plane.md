@@ -2,7 +2,16 @@
 
 In this lab, we will upgrade the Control Plane of our Amazon EKS in AWS console.
 
-Please note that if we run `kubent` now, it will show a PodSecurityPolicy called "eks.privileged". As stated in [Pod security policy (PSP) removal FAQ](https://docs.aws.amazon.com/eks/latest/userguide/pod-security-policy-removal-faq.html), Amazon EKS automatically migrates this PSP to a PSS-based enforcement. *No action is needed on your part*. 
+Please note that if we run `kubent` now, it will show a PodSecurityPolicy called "eks.privileged". For example,
+```
+__________________________________________________________________________________________
+>>> Deprecated APIs removed in 1.25 <<<
+------------------------------------------------------------------------------------------
+KIND                NAMESPACE     NAME             API_VERSION      REPLACE_WITH (SINCE)
+PodSecurityPolicy   <undefined>   eks.privileged   policy/v1beta1   <removed> (1.21.0)
+```
+
+As stated in [Pod security policy (PSP) removal FAQ](https://docs.aws.amazon.com/eks/latest/userguide/pod-security-policy-removal-faq.html), Amazon EKS automatically migrates this PSP to a PSS-based enforcement. *No action is needed on your part*. 
 
 ![assets](/assets/cp-0-psp-removal-700w.jpg)
 
@@ -14,7 +23,7 @@ Please note that if we run `kubent` now, it will show a PodSecurityPolicy called
 
    ![assets](/assets/cp-2-view-cluster-and-version.jpg)
    
-3. A new window will pop up, showing the version it will upgrade to. Click "Update" to confirm.
+3. A new window will pop up, showing the version that it will upgrade to. Click "Update" to confirm.
 
    ![assets](/assets/cp-3-update-confirm.jpg)
 
@@ -26,11 +35,13 @@ Please note that if we run `kubent` now, it will show a PodSecurityPolicy called
 
    ![assets](/assets/cp-5-update-complete.jpg)
 
-Please note that if we run `kubectl get psp eks.privileged` now, 
-```sh
-kubectl get psp eks.privileged
-```
-the psp no longer exists in our cluster. For example,
-```
-error: the server doesn't have a resource type "psp"
-```
+6. Please note that if we run `kubectl get psp eks.privileged` now, 
+   ```sh
+   kubectl get psp eks.privileged
+   ```
+   
+   the psp no longer exists in our cluster. For example,
+   ```
+   error: the server doesn't have a resource type "psp"
+   ```
+   
