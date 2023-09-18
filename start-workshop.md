@@ -92,7 +92,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     cronjob.batch/hello created
     ```
 
-- Check cronjob schedule and log kubernetes pod to verify that Cront running normally
+- Check cronjob schedule and log kubernetes pod to verify that job run successfully
 
     ```
     k get cj
