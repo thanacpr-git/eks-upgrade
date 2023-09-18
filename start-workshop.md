@@ -56,6 +56,63 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     ```
     kubectl get --namespace workshop svc -w frontend
     ```
+### [3] Deploy test application on EKS Cluster
+
+- Deploy Cronjob
+
+    ```
+    cd ~/environment 
+    cat << EoF > ${HOME}/environment/my-cj.yaml
+
+
+    apiVersion: batch/v1beta1
+    kind: CronJob
+    metadata:
+    name: hello
+    spec:
+    schedule: "* * * * *"
+    jobTemplate:
+        spec:
+        template:
+            spec:
+            containers:
+            name: hello
+                image: busybox:1.28
+                imagePullPolicy: IfNotPresent
+                command:
+                  /bin/sh
+                  -c
+                  date; echo Hello from the Kubernetes cluster
+            restartPolicy: OnFailure
+    EoF
+    k apply -f ~/environment/my-cj.yaml
+
+
+    Warning: batch/v1beta1 CronJob is deprecated in v1.21+, unavailable in v1.25+; use batch/v1 CronJob
+    cronjob.batch/hello created
+    ```
+
+- Check cronjob schedule and log kubernetes pod to verify that Cront running normally
+
+    ```
+    k get cj
+
+    NAME    SCHEDULE    SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+    hello   * * * * *   False     0        22s             84s
+
+
+    k get po
+
+    NAME                   READY   STATUS      RESTARTS   AGE
+    hello-28239919-72hvv   0/1     Completed   0          103s
+    hello-28239920-w7w85   0/1     Completed   0          43s
+
+
+    k logs hello-28239920-w7w85
+
+    Mon Sep 11 01:20:00 UTC 2023
+    Hello from the Kubernetes cluster
+    ```
 
     
 <!--By participating in this workshop you will be provided with an AWS account to use to complete the lab material. Connect to the portal by browsing to https://catalog.workshops.aws/. Click on <strong>Get Started.</strong>
