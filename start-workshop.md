@@ -1,6 +1,63 @@
-Before proceeding with Planning and Upgrade , please follow workshop set up instruction from <strong>Option 1 (Preferred): Running the workshop using Workshop Studio for AWS events</strong> in https://catalog.workshops.aws/eks-immersionday/en-US/introduction. Recheck that EKS cluster and Cloud 9 has been set up properly. 
+Before proceeding with Planning and Upgrade , please follow workshop set up instruction from <strong>Option 1 (Preferred): Running the workshop using Workshop Studio for AWS events</strong> in https://catalog.workshops.aws/eks-immersionday/en-US/introduction. Next follow below steps :
 
 
+### [1] Check Running EKS version 
+- Verify EKS cluster in version 1.24 from console https://us-east-1.console.aws.amazon.com/eks/home?region=us-east-1#/clusters
+  
+    ![Alt text](/assets/00_start_eks_version.png "a title")
+
+- (Optional) Add the “k” alias for the command kubectl. This will allow user to type only "k" instead of kubectl everytime.
+
+    ```
+    echo "alias k=kubectl" | tee -a ~/.bash_profile
+    .  ~/.bash_profile
+    ```
+    
+    **Check alias setting** 
+
+    k get node
+
+    **Output**
+    ```
+    NAME                              STATUS   ROLES    AGE   VERSION
+    ip-192-168-116-204.ec2.internal   Ready    <none>   19m   v1.24.16-eks-8ccc7ba
+    ip-192-168-145-136.ec2.internal   Ready    <none>   19m   v1.24.16-eks-8ccc7ba
+    ip-192-168-163-67.ec2.internal    Ready    <none>   19m   v1.24.16-eks-8ccc7ba
+    ```
+
+### [2] Deploy the microservices application using Helm
+
+- From Cloud 9 Console , Install helm using step below :
+
+    ```
+    cd ~/environment/eks-app-mesh-polyglot-demo
+    helm install workshop ~/environment/eks-app-mesh-polyglot-demo/workshop/helm-chart/
+
+    NAME: workshop
+    LAST DEPLOYED: Mon Sep 11 00:56:04 2023
+    NAMESPACE: default
+    STATUS: deployed
+    REVISION: 1
+    NOTES:
+    ```
+
+
+- Get the application URL by running these commands:
+
+    ```
+    export LB_NAME=$(kubectl get svc --namespace workshop frontend -o jsonpath="{.status.loadBalancer.ingress[*].hostname}")
+    
+    echo http://$LB_NAME:80
+    ```
+
+
+    **NOTE:** The command may take a few minutes for the LoadBalancer to be available. You can monitor the status of LoadBalancer by using command
+    
+    ```
+    kubectl get --namespace workshop svc -w frontend
+    ```
+
+    
 <!--By participating in this workshop you will be provided with an AWS account to use to complete the lab material. Connect to the portal by browsing to https://catalog.workshops.aws/. Click on <strong>Get Started.</strong>
 
 ![Https catalog](https://www.eksworkshop.com/assets/images/workshop-studio-home-ee08e612fd0a646451211731ad813b7f.png)
