@@ -185,28 +185,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
           name: proddetail
     EoF
     k apply -f ~/environment/hpa_proddetail.yaml
-    ``` 
-
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: proddetail
-  namespace: workshop
-spec:
-  maxReplicas: 3
-  metrics:
-  - resource:
-      name: cpu
-      targetAverageUtilization: 40
-    type: Resource
-  minReplicas: 1
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: proddetail
-EoF
-k apply -f ~/environment/hpa_proddetail.yaml
-```      
+    ```    
     
 <!--By participating in this workshop you will be provided with an AWS account to use to complete the lab material. Connect to the portal by browsing to https://catalog.workshops.aws/. Click on <strong>Get Started.</strong>
 
