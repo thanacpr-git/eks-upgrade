@@ -13,6 +13,8 @@ Firstly, we need to determine whether you already have `kubectl` installed on yo
 kubectl version --short --client
 ```
 You will get the current `kubectl` version. 
+
+Output
 ```bash no-copy
 Client Version: v1.20.4-eks-6b7464
 ```
@@ -46,6 +48,8 @@ Now, Verify your newly installed `kubectl` version
 kubectl version --short --client
 ```
 You will get a result like this.
+
+Output
 ```bash no-copy
 WSParticipantRole:~/environment $ kubectl version --short --client
 
@@ -58,6 +62,9 @@ We can try running ...
 kubectl get node
 ```
 To check if our new `kubectl` is working as the result below.
+
+
+Output
 ```bash no-copy
 WSParticipantRole:~/environment $ kubectl get node
 NAME                              STATUS   ROLES    AGE   VERSION
@@ -77,6 +84,8 @@ sh -c "$(curl -sSL https://git.io/install-kubent)"
 ```
 You will get the result below. This means `kubent` is installed completely
 
+
+Output
 ```shell no-copy
 WSParticipantRole:~/environment $ sh -c "$(curl -sSL https://git.io/install-kubent)"
 >>> kubent installation script <<<
@@ -97,6 +106,8 @@ kubent
 
 You should get the below result. It states that `CronJob` will be deprecated in `1.25` and `HorizontalPodAutoScaler` will be deprecated in `1.26`. We get the quick list of API object that we should update.
 
+
+Output
 ```bash no-copy
 WSParticipantRole:~/environment/ (master) $ kubent
 2:45PM INF >>> Kube No Trouble `kubent` <<<
@@ -133,6 +144,9 @@ curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable
 ```
 
 You will see the result like this
+
+
+Output
 ```bash no-copy
 WSParticipantRole:~/environment $ curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -151,6 +165,9 @@ Try list the file to see if you can see `rwx` permission to run the file
 ll kubectl-convert
 ```
 You will see the result like this.
+
+
+Output
 ```bash no-copy
 WSParticipantRole:~/environment $ ll kubectl-convert 
 -rwxrwxr-x 1 ec2-user ec2-user 48812032 Sep 18 05:23 kubectl-convert
@@ -167,6 +184,8 @@ kubectl convert
 ```
 to test if `kubectl-convert` is installed completely. You should get the below result.
 
+
+Output
 ```bash no-copy
 WSParticipantRole:~/environment $ kubectl convert
 error: must specify one of -f and -k
@@ -181,6 +200,7 @@ kubectl convert -f my-cj.yaml
 ```
 `kubectl-convert` will return the output in new YAML format like below.
 
+Output
 ```yaml no-copy
 apiVersion: batch/v1
 kind: CronJob
@@ -226,6 +246,9 @@ You can see the difference between **my-cj.yaml** and **my-cj-new.yaml** using *
 diff -U -1 my-cj.yaml my-cj-new.yaml
 ```
 You can see the difference between 2 files. The new line are marked as Green and the removed line are marked as Red. You can see that the apiVersion has been changed and some context has been added.
+
+
+Output
 ```diff no-copy
 WSParticipantRole:~/environment $ diff -U -1 my-cj.yaml my-cj-new.yaml                                                                    
 --- my-cj.yaml  2023-09-18 05:26:14.427246661 +0000
@@ -273,6 +296,9 @@ kubectl apply -f my-cj-new.yaml
 ```
 
 You will see that our CronJob **Hello** has been configure.
+
+
+Output
 ```bash
 WSParticipantRole:~/environment $ k apply -f my-cj-new.yaml
 cronjob.batch/hello configured
@@ -291,6 +317,9 @@ diff -U -1 hpa_proddetail.yaml hpa_proddetail_new.yaml
 ```
 You can see the difference between 2 files. The new line are marked as Green and the removed line are marked as Red. You can see that the major change has more YAML definition structure change compared to CronJob definition which is minor change.
 
+
+
+Output
 ```diff no-copy
 WSParticipantRole:~/environment $ diff -U -1 hpa_proddetail.yaml hpa_proddetail_new.yaml
 --- hpa_proddetail.yaml 2023-09-18 14:44:50.624566138 +0000
@@ -331,10 +360,15 @@ spec:
 This step we are going to use `kubent` again to make sure that our `CronJob` and `HPA`'s definition has been update and has no trouble
 
 Now, we try running.
+
+
 ```bash
 kubent
 ```
 We will see `kubent`'s result with no `CronJob` and `HPA` shown anymore.
+
+
+Output
 ```bash no-copy
 WSParticipantRole:~/environment $ kubent
 8:41AM INF >>> Kube No Trouble `kubent` <<<
@@ -364,6 +398,9 @@ Now run.
 kubectl get node
 ```
 You can see that our nodes' version is still at `1.24`
+
+
+Output
 ```bash no-copy
 WSParticipantRole:~/environment $ kubectl get node
 NAME                              STATUS   ROLES    AGE   VERSION
@@ -379,6 +416,8 @@ kubectl version --short
 
 We will see the result as below.
 
+
+Output
 ```bash no-copy
 WSParticipantRole:~/environment $ kubectl version --short
 Flag --short has been deprecated, and will be removed in the future. The --short output will become the default.

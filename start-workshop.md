@@ -182,3 +182,9 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     NAME         REFERENCE               TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
     proddetail   Deployment/proddetail   1%/40%    1         3         1          18m
     ```
+
+## Congratulations!!!!
+
+You are ready for our next step to prepare your upgrade. 
+Click [HERE](prepare.md) to go to our next step.
+

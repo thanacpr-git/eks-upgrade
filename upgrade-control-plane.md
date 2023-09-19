@@ -45,3 +45,7 @@ As stated in [Pod security policy (PSP) removal FAQ](https://docs.aws.amazon.com
    error: the server doesn't have a resource type "psp"
    ```
    
+## Congratulations!!!!
+
+You are ready for our next step to upgrade EKS managed node group. 
+Click [HERE](upgrade-data-plane.md) to go to our next step.

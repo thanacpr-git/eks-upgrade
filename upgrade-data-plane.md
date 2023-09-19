@@ -178,6 +178,11 @@ to view the version number in the **AMI release version** column
     kubectl scale --replicas=1 deployment proddetail -n workshop
     ```
 
+
+
+<details>
+<summary>Note about Pod Disruptions Budget (PDB)</summary>
+
 **Note that** before we upgraded the Data Plane, if we did not scale out the number of replicas, and the status of PDBs 
 ```sh
 kubectl get pdb -n workshop
@@ -223,3 +228,5 @@ The Data Plane upgrade can also be verified in the Amazon Console
 
 ![assets](/assets/dp-7-update-complete.jpg)
 
+
+</details>
