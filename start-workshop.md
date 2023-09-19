@@ -2,12 +2,13 @@
 
 Before proceeding with Planning and Upgrade , please follow workshop set up instruction from <strong>Option 1 (Preferred): Running the workshop using Workshop Studio for AWS events</strong> in https://catalog.workshops.aws/eks-immersionday/en-US/introduction. Next set up a workload by following below steps:
 
-### [1] Check Running EKS version 
+1. Check Running EKS version  
+
 - Verify EKS cluster in version 1.24 from console https://us-east-1.console.aws.amazon.com/eks/home?region=us-east-1#/clusters
   
     ![Alt text](/assets/00_start_eks_version.png "a title")
 
-### [2] Deploy the microservices application using Helm
+2. Deploy the microservices application using Helm  
 
 - From Cloud 9 Console , Install helm using step below :
 
@@ -25,7 +26,6 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     NOTES:
     ```
 
-
 - Get the application URL by running these commands:
 
     ```
@@ -41,7 +41,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     kubectl get --namespace workshop svc -w frontend
     ```
 
-### [3] Deploy test application on EKS Cluster
+3. Deploy deprecrated k8s resources: CronJob and HPA on EKS Cluster for upgrading purpose  
 
 - Deploy Cronjob
 
@@ -76,7 +76,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     cronjob.batch/hello created
     ```
 
-- Check cronjob schedule and log in kubernetes pod to verify that job run successfully
+- Check cronjob schedule and log in kubernetes pod to verify that job run successfully  
 
     ```
     kubectl get cj
@@ -104,7 +104,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     Mon Sep 11 01:20:00 UTC 2023
     Hello from the Kubernetes cluster
     ```
-- Deploy Metric Server
+- Deploy Metric Server before applying HPA
 
     ```
     kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
@@ -130,7 +130,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     }
     ```
 
-- Verify that Metric server run successfully , CPU and Meory will be displayed from below command : 
+- Verify that Metric server run successfully, CPU and Meory will be displayed from below command:  
 
     ```
     kubectl top node
@@ -142,8 +142,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     ip-10-0-43-103.ap-southeast-1.compute.internal           610m         31%         1039Mi          14%   
     ```
 
-
-- Deploy Horizontal Pod Autoscaler :
+- Apply Horizontal Pod Autoscaler for proddetail deployment:  
 
     ```
     cd ~/environment 
@@ -183,52 +182,3 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     NAME         REFERENCE               TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
     proddetail   Deployment/proddetail   1%/40%    1         3         1          18m
     ```
-<!--By participating in this workshop you will be provided with an AWS account to use to complete the lab material. Connect to the portal by browsing to https://catalog.workshops.aws/. Click on <strong>Get Started.</strong>
-
-![Https catalog](https://www.eksworkshop.com/assets/images/workshop-studio-home-ee08e612fd0a646451211731ad813b7f.png)
-
-### Workshop Studio Home
-
-You will be prompted to sign in. Select the option Email One-Time Password(OTP).
-
-![Https OTP](https://www.eksworkshop.com/assets/images/ws-studio-login-51632e8052f5f148284b88a20770dfbd.png)
-
-### Workshop Studio Sign in
-
-Enter your email address and press Send passcode, which will send a one-time passcode to your inbox. When the email arrives you can enter the passcode and log-in.
-
-Your instructor should have provided you with an Event access code prior the starting these exercises. Enter the provided hash in the text box and hit Next.
-
-![Https Signon](https://www.eksworkshop.com/assets/images/event-code-e952a875ef4ac6300550c28fe7ef7ccc.png)
-
-
-Event Code
-
-Read and accept the Terms and Conditions and click Join event to continue.
-
-https://www.eksworkshop.com/assets/images/review-and-join-e68eb60861dc6b67dc4ec75deb5307bb.png
-
-
-Review and Join
-
-You will be presented with your personal dashboard. Select the Open AWS Console button to be taken to your AWS account console:
-
-![Https console](https://www.eksworkshop.com/assets/images/openconsole-3df798bbfb5475407f71c552d09c94c4.png)
-
-
-Open Console
-
-Next return to the personal dashboard page and scroll down to the Event Outputs section to get a quickstart link to your Cloud9 IDE. Open this in a new browser tab:
-
-![Https browser](https://www.eksworkshop.com/assets/images/cloud9-2c554c978c7b41b25864558666aeef89.png)
-
-### Cloud9 Link
-
-Press Get started to access the workshop splash page:
-
-![Https page](https://www.eksworkshop.com/assets/images/workshop-event-page-7391a20bc4599267ffb82643b0b3f3fc.png)
-
-You can now proceed to the <strong>Navigating</strong> the labs section.
-
--->
-
