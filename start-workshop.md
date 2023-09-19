@@ -86,15 +86,16 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     NAME    SCHEDULE    SUSPEND   ACTIVE   LAST SCHEDULE   AGE
     hello   * * * * *   False     0        22s             84s
     ```
+    To check if a job ran successfully, list the pod(s)
     ```
     kubectl get po
     ```    
     Output
     ```
     NAME                   READY   STATUS      RESTARTS   AGE
-    hello-28239919-72hvv   0/1     Completed   0          103s
     hello-28239920-w7w85   0/1     Completed   0          43s
     ```
+    Fetch the log from the *above pod*
     ```
     kubectl logs hello-28239920-w7w85
     ```
