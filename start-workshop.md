@@ -68,7 +68,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
                 - date; echo Hello from the Kubernetes cluster
               restartPolicy: OnFailure
     EoF
-    k apply -f ~/environment/my-cj.yaml
+    kubectl apply -f ~/environment/my-cj.yaml
     ```
     Dismiss the output below
     ```
@@ -79,7 +79,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
 - Check cronjob schedule and log in kubernetes pod to verify that job run successfully
 
     ```
-    k get cj
+    kubectl get cj
     ```
     Output
     ```
@@ -87,7 +87,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     hello   * * * * *   False     0        22s             84s
     ```
     ```
-    k get po
+    kubectl get po
     ```    
     Output
     ```
@@ -96,7 +96,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     hello-28239920-w7w85   0/1     Completed   0          43s
     ```
     ```
-    k logs hello-28239920-w7w85
+    kubectl logs hello-28239920-w7w85
     ```
     Output
     ```
@@ -132,7 +132,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
 - Verify that Metric server run successfully , CPU and Meory will be displayed from below command : 
 
     ```
-    k top node
+    kubectl top node
     ```
     Output
     ```
@@ -166,7 +166,7 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
           kind: Deployment
           name: proddetail
     EoF
-    k apply -f ~/environment/hpa_proddetail.yaml
+    kubectl apply -f ~/environment/hpa_proddetail.yaml
     ```    
     
 <!--By participating in this workshop you will be provided with an AWS account to use to complete the lab material. Connect to the portal by browsing to https://catalog.workshops.aws/. Click on <strong>Get Started.</strong>
