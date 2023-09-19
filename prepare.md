@@ -14,7 +14,7 @@ kubectl version --short --client
 ```
 You will get the current `kubectl` version. 
 
-Output
+**Output**
 ```bash no-copy
 Client Version: v1.20.4-eks-6b7464
 ```
@@ -49,11 +49,11 @@ kubectl version --short --client
 ```
 You will get a result like this.
 
-Output
+**Output**
 ```bash no-copy
 WSParticipantRole:~/environment $ kubectl version --short --client
 
-Flag --short has been deprecated, and will be removed in the future. The --short output will become the default.
+Flag --short has been deprecated, and will be removed in the future. The --short **Output** will become the default.
 Client Version: v1.25.12-eks-8ccc7ba
 Kustomize Version: v4.5.7
 ```
@@ -64,7 +64,7 @@ kubectl get node
 To check if our new `kubectl` is working as the result below.
 
 
-Output
+**Output**
 ```bash no-copy
 WSParticipantRole:~/environment $ kubectl get node
 NAME                              STATUS   ROLES    AGE   VERSION
@@ -85,7 +85,7 @@ sh -c "$(curl -sSL https://git.io/install-kubent)"
 You will get the result below. This means `kubent` is installed completely
 
 
-Output
+**Output**
 ```shell no-copy
 WSParticipantRole:~/environment $ sh -c "$(curl -sSL https://git.io/install-kubent)"
 >>> kubent installation script <<<
@@ -107,7 +107,7 @@ kubent
 You should get the below result. It states that `CronJob` will be deprecated in `1.25` and `HorizontalPodAutoScaler` will be deprecated in `1.26`. We get the quick list of API object that we should update.
 
 
-Output
+**Output**
 ```bash no-copy
 WSParticipantRole:~/environment/ (master) $ kubent
 2:45PM INF >>> Kube No Trouble `kubent` <<<
@@ -136,7 +136,7 @@ HorizontalPodAutoscaler   workshop    proddetail   autoscaling/v2beta1   autosca
 ```
 ## 2.3 Install `kubectl-convert` to convert our manifest to use with new cluster version.
 
-Kubectl Convert config files between different API versions. Both YAML and JSON formats are accepted. The default output will be printed to stdout in YAML format. One can use -o option to change to output destination.
+Kubectl Convert config files between different API versions. Both YAML and JSON formats are accepted. The default **Output** will be printed to stdout in YAML format. One can use -o option to change to **Output** destination.
 
 First we need to install `kubectl-convert`, using the command below
 ```bash
@@ -146,7 +146,7 @@ curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable
 You will see the result like this
 
 
-Output
+**Output**
 ```bash no-copy
 WSParticipantRole:~/environment $ curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -167,7 +167,7 @@ ll kubectl-convert
 You will see the result like this.
 
 
-Output
+**Output**
 ```bash no-copy
 WSParticipantRole:~/environment $ ll kubectl-convert 
 -rwxrwxr-x 1 ec2-user ec2-user 48812032 Sep 18 05:23 kubectl-convert
@@ -185,7 +185,7 @@ kubectl convert
 to test if `kubectl-convert` is installed completely. You should get the below result.
 
 
-Output
+**Output**
 ```bash no-copy
 WSParticipantRole:~/environment $ kubectl convert
 error: must specify one of -f and -k
@@ -198,9 +198,9 @@ First we will update our CronJob **Hello** yaml file. Simply run.
 ```bash
 kubectl convert -f my-cj.yaml
 ```
-`kubectl-convert` will return the output in new YAML format like below.
+`kubectl-convert` will return the **Output** in new YAML format like below.
 
-Output
+**Output**
 ```yaml no-copy
 apiVersion: batch/v1
 kind: CronJob
@@ -237,7 +237,7 @@ spec:
 status: {}
 ```
 
-We can redirect these output to our new file, like this.
+We can redirect these **Output** to our new file, like this.
 ```bash
 kubectl convert -f my-cj.yaml -o yaml >> my-cj-new.yaml
 ```
@@ -248,7 +248,7 @@ diff -U -1 my-cj.yaml my-cj-new.yaml
 You can see the difference between 2 files. The new line are marked as Green and the removed line are marked as Red. You can see that the apiVersion has been changed and some context has been added.
 
 
-Output
+**Output**
 ```diff no-copy
 WSParticipantRole:~/environment $ diff -U -1 my-cj.yaml my-cj-new.yaml                                                                    
 --- my-cj.yaml  2023-09-18 05:26:14.427246661 +0000
@@ -298,7 +298,7 @@ kubectl apply -f my-cj-new.yaml
 You will see that our CronJob **Hello** has been configure.
 
 
-Output
+**Output**
 ```bash
 WSParticipantRole:~/environment $ k apply -f my-cj-new.yaml
 cronjob.batch/hello configured
@@ -319,7 +319,7 @@ You can see the difference between 2 files. The new line are marked as Green and
 
 
 
-Output
+**Output**
 ```diff no-copy
 WSParticipantRole:~/environment $ diff -U -1 hpa_proddetail.yaml hpa_proddetail_new.yaml
 --- hpa_proddetail.yaml 2023-09-18 14:44:50.624566138 +0000
@@ -356,6 +356,16 @@ spec:
 +  desiredReplicas: 0
 ```
 
+Now, try apply our new HPA Yaml file.
+```bash
+kubectl apply -f hpa_proddetail_new.yaml
+```
+
+**Output**
+```
+WSParticipantRole:~/environment $ kubectl apply -f hpa_proddetail_new.yaml 
+horizontalpodautoscaler.autoscaling/proddetail configured
+```
 ### Revalidate using `kubent` to make sure that we have no trouble any more
 This step we are going to use `kubent` again to make sure that our `CronJob` and `HPA`'s definition has been update and has no trouble
 
@@ -368,7 +378,7 @@ kubent
 We will see `kubent`'s result with no `CronJob` and `HPA` shown anymore.
 
 
-Output
+**Output**
 ```bash no-copy
 WSParticipantRole:~/environment $ kubent
 8:41AM INF >>> Kube No Trouble `kubent` <<<
@@ -400,7 +410,7 @@ kubectl get node
 You can see that our nodes' version is still at `1.24`
 
 
-Output
+**Output**
 ```bash no-copy
 WSParticipantRole:~/environment $ kubectl get node
 NAME                              STATUS   ROLES    AGE   VERSION
@@ -417,10 +427,10 @@ kubectl version --short
 We will see the result as below.
 
 
-Output
+**Output**
 ```bash no-copy
 WSParticipantRole:~/environment $ kubectl version --short
-Flag --short has been deprecated, and will be removed in the future. The --short output will become the default.
+Flag --short has been deprecated, and will be removed in the future. The --short **Output** will become the default.
 Client Version: v1.25.12-eks-8ccc7ba
 Kustomize Version: v4.5.7
 Server Version: v1.24.16-eks-2d98532
