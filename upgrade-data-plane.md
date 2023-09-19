@@ -11,6 +11,8 @@ at any given time, how many replicas of a pod must be available (`minAvailable`)
    ```
 
    Currently, all Deployments have only 1 replica.
+
+   **Output**
    ```
    NAME          READY   UP-TO-DATE   AVAILABLE   AGE
    frontend      1/1     1            1           9h
@@ -32,6 +34,8 @@ Scale out the Deployment to have more than 1 replica, for example, 3 replicas
    ```
 
    For example,
+
+   **Output**
    ```
    NAME          READY   UP-TO-DATE   AVAILABLE   AGE
    frontend      3/3     3            3           10h
@@ -83,6 +87,8 @@ Scale out the Deployment to have more than 1 replica, for example, 3 replicas
    ```
 
    Because of 3 replicas and `minAvailable` of 1, the PDBs have "ALLOWED DISRUPTIONS" of 2
+
+   **Output**
    ```
    NAME              MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
    frontend-pdb      1               N/A               2                     11s
@@ -103,11 +109,11 @@ to view the version number in the **AMI release version** column
 
    ![assets](/assets/dp-3-compute-tab.jpg)
 
-8. Click "Update now" next to the version number. A new window will pop up, showing the "Rolling update" strategy. Click "Update" to confirm.
+8. Click **"Update now"** next to the version number. A new window will pop up, showing the **"Rolling update"** strategy. Click **"Update"** to confirm.
 
    ![assets](/assets/dp-4-update-confirm.jpg)
 
-9. The **Status** will display "Updating". The time to update the Data Plan depends on the size of the cluster. For this lab, it takes approximately 17 minutes. You may click the refresh button to refresh the page for the latest status. 
+9. The **Status** will display **"Updating"**. The time to update the Data Plan depends on the size of the cluster. For this lab, it takes approximately 17 minutes. You may click the refresh button to refresh the page for the latest status. 
 
    ![assets](/assets/dp-5-during-update.jpg)
 
@@ -117,6 +123,8 @@ to view the version number in the **AMI release version** column
     ```
 
     The pods will be terminated and re-created, for example,
+
+    **Output**
     ```
     ...
     frontend-765f57cd79-xvd7t      1/1     Running             0          46s
@@ -146,7 +154,9 @@ to view the version number in the **AMI release version** column
     done
     ```
 
-    The scipt first gets the DNS of Load Balancer and then runs infinite while-loop to cURL the DNS. If the application is up, it will echo OK with a timestamp.  If the application is down, it will echo NOT-OK with a timestamp.  With PDBs, our application is running without interruption. The expected output is shown below, for example,
+    The script first gets the DNS of Load Balancer and then runs infinite while-loop to cURL the DNS. If the application is up, it will echo OK with a timestamp.  If the application is down, it will echo NOT-OK with a timestamp.  With PDBs, our application is running without interruption. The expected output is shown below, for example,
+
+    **Output**
     ```
     ...
     OK -- Sat Sep 16 22:51:42 UTC 2023
