@@ -1,29 +1,11 @@
-Before proceeding with Planning and Upgrade , please follow workshop set up instruction from <strong>Option 1 (Preferred): Running the workshop using Workshop Studio for AWS events</strong> in https://catalog.workshops.aws/eks-immersionday/en-US/introduction. Next follow below steps :
+# Start the Workshop
 
+Before proceeding with Planning and Upgrade , please follow workshop set up instruction from <strong>Option 1 (Preferred): Running the workshop using Workshop Studio for AWS events</strong> in https://catalog.workshops.aws/eks-immersionday/en-US/introduction. Next set up a workload by following below steps:
 
 ### [1] Check Running EKS version 
 - Verify EKS cluster in version 1.24 from console https://us-east-1.console.aws.amazon.com/eks/home?region=us-east-1#/clusters
   
     ![Alt text](/assets/00_start_eks_version.png "a title")
-
-- (Optional) Add the “k” alias for the command kubectl. This will allow user to type only "k" instead of kubectl everytime.
-
-    ```
-    echo "alias k=kubectl" | tee -a ~/.bash_profile
-    .  ~/.bash_profile
-    ```
-    
-    **Check alias setting** 
-
-    k get node
-
-    **Output**
-    ```
-    NAME                              STATUS   ROLES    AGE   VERSION
-    ip-192-168-116-204.ec2.internal   Ready    <none>   19m   v1.24.16-eks-8ccc7ba
-    ip-192-168-145-136.ec2.internal   Ready    <none>   19m   v1.24.16-eks-8ccc7ba
-    ip-192-168-163-67.ec2.internal    Ready    <none>   19m   v1.24.16-eks-8ccc7ba
-    ```
 
 ### [2] Deploy the microservices application using Helm
 
