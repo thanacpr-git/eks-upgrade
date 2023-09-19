@@ -168,7 +168,20 @@ Before proceeding with Planning and Upgrade , please follow workshop set up inst
     EoF
     kubectl apply -f ~/environment/hpa_proddetail.yaml
     ```    
-    
+    Output
+    ```
+    Warning: autoscaling/v2beta1 HorizontalPodAutoscaler is deprecated in v1.22+, unavailable in v1.25+; use autoscaling/v2 HorizontalPodAutoscaler
+    horizontalpodautoscaler.autoscaling/proddetail created
+    ```
+    Verify if HPA is set up properly
+    ```
+    kubectl get hpa proddetail -n workshop
+    ```
+    Output
+    ```
+    NAME         REFERENCE               TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+    proddetail   Deployment/proddetail   1%/40%    1         3         1          18m
+    ```
 <!--By participating in this workshop you will be provided with an AWS account to use to complete the lab material. Connect to the portal by browsing to https://catalog.workshops.aws/. Click on <strong>Get Started.</strong>
 
 ![Https catalog](https://www.eksworkshop.com/assets/images/workshop-studio-home-ee08e612fd0a646451211731ad813b7f.png)
