@@ -240,3 +240,45 @@ The Data Plane upgrade can also be verified in the Amazon Console
 
 
 </details>
+
+15. The final step of our Amazon EKS upgrade journey is to double-check that all components have been upgraded.
+
+    First, verify that the Control Plane and the Data Plane are the version that we upgraded to. For the Control Plane, you can verify the version in Amazon Console
+    ![assets](/assets/cp-5-update-complete.jpg)
+
+    For the Data Plane, we can either view the version in the Amazon Console or run the command below to verify the version.
+    ```sh
+    kubectl get no
+    ```
+
+    **Output**
+    ```
+    NAME                              STATUS   ROLES    AGE   VERSION
+    ip-192-168-102-250.ec2.internal   Ready    <none>   17m   v1.25.12-eks-8ccc7ba
+    ip-192-168-132-107.ec2.internal   Ready    <none>   17m   v1.25.12-eks-8ccc7ba
+    ip-192-168-161-112.ec2.internal   Ready    <none>   17m   v1.25.12-eks-8ccc7ba
+    ```
+
+    Next, verify that the `kubectl` version is **+/- 1 version** of the version of our cluster
+    ```sh
+    kubectl version --short
+    ```
+
+    **Output**
+    ```
+    WSParticipantRole:~/environment $ kubectl version --short
+    Flag --short has been deprecated, and will be removed in the future. The --short **Output** will become the default.
+    Client Version: v1.25.12-eks-8ccc7ba
+    Kustomize Version: v4.5.7
+    Server Version: v1.24.16-eks-2d98532
+    ```
+
+    Last but not least, get the application URL and verify that the application is working in the browser
+    ```sh
+    export LB_NAME=$(kubectl get svc --namespace workshop frontend -o jsonpath="{.status.loadBalancer.ingress[*].hostname}")
+  
+    echo http://$LB_NAME:80
+    ```
+
+    ## Congratulations!!!!
+    You have completed the Amazon EKS upgrade!
