@@ -42,7 +42,7 @@ By the end of this workshop you will have learned the following:
 
 ## Table of contents
 
-1. [Start the workshop](/start-workshop.md)
+1. [Start the workshop](/1-start-workshop.md)
 
  
 <!--
@@ -53,7 +53,7 @@ By the end of this workshop you will have learned the following:
 - Install HPA Add-on
 - Checking that the app works
 -->
-2. [Upgrade planning and preparations](/prepare.md)
+2. [Upgrade planning and preparations](/2-prepare.md)
 <!-- 
 ** Bo **
 - Install kubectl +/- 1 from cluster's
@@ -68,8 +68,8 @@ By the end of this workshop you will have learned the following:
   * kubectl version short
 -->
 3. EKS Upgrade
-   1. [Upgrade control plane](/upgrade-control-plane.md)
-   2. [Upgrade data plane](/upgrade-data-plane.md)
+   1. [Upgrade control plane](/3-upgrade-control-plane.md)
+   2. [Upgrade data plane](/4-upgrade-data-plane.md)
 <!-- 
 ** Joe ** Jade comment > Note sure that step should be according to this : https://aws.github.io/aws-eks-best-practices/upgrades/ under topics :               Under topic : Upgrade your control plane and data plane in sequence¶
            Deprecated API Using KubeNT > Control Plane > Add on > Data Plane
