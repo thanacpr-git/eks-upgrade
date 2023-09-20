@@ -197,5 +197,5 @@ Verify EKS cluster in version 1.24 from console https://us-east-1.console.aws.am
 ## Congratulations!!!!
 
 You are ready for our next step to prepare your upgrade. 
-Click [HERE](prepare.md) to go to our next step.
+Click [HERE](2-prepare.md) to go to our next step.
 
