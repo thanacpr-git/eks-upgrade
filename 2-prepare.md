@@ -439,7 +439,7 @@ Server Version: v1.24.16-eks-2d98532
 ## Congratulations!!!!
 
 You are ready for our next step to upgrade EKS control Plan. 
-Click [HERE](upgrade-control-plane.md) to go to our next step.
+Click [HERE](3-upgrade-control-plane.md) to go to our next step.
 
 <!-- 
 ** Bo **
